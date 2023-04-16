@@ -71,6 +71,28 @@ TEST_CASE("Arithmetic operations") {
     CHECK(gg == -7 / 15);
 }
 
-TEST_CASE("Boolean operations"){
-
+TEST_CASE("Boolean operations") {
+    Fraction a;
+    Fraction b(2, 5);
+    Fraction bb(2, 5);
+    Fraction c(3, 10);
+    Fraction d(-5, 8);
+    Fraction dd(10, -16);
+    CHECK(!a);
+    CHECK_FALSE(!b);
+    CHECK(a != b);
+    CHECK(c != d);
+    CHECK(b == bb);
+    CHECK(d == dd);
+    CHECK(a >= a);
+    CHECK(bb >= b);
+    CHECK(c >= c);
+    CHECK(dd >= d);
+    CHECK(a <= a);
+    CHECK(b <= bb);
+    CHECK(c <= c);
+    CHECK(d <= dd);
+    CHECK(b > a);
+    CHECK(d < a);
+    CHECK(b > d);
 }
