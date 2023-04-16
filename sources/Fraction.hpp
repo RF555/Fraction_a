@@ -16,14 +16,21 @@ namespace ariel {
 
         Fraction(const Fraction &q);
 
-        explicit Fraction(const double &d);
+        Fraction(const int &n);
 
-        explicit Fraction(const float &f);
+        Fraction(const double &d);
+
+        Fraction(const float &f);
 
         ~Fraction();
 
+        int numerator();
+
+        int denominator();
+
         Fraction &operator=(const Fraction &q);
 
+        // Arithmetic operations:
         Fraction &operator+=(const Fraction &q);
 
         Fraction &operator-=(const Fraction &q);
@@ -63,6 +70,12 @@ namespace ariel {
         friend bool operator<(const Fraction &a, const Fraction &b);
 
         friend bool operator>(const Fraction &a, const Fraction &b);
+
+        // Conversions:
+
+        explicit operator double() const;
+
+        explicit operator float() const;
 
         // I/O operations:
         friend std::ostream &operator<<(ostream &output, const Fraction &q);
