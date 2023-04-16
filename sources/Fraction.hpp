@@ -87,6 +87,8 @@ namespace ariel {
 
         static istream &checkNextChar(istream &input, char expectedChar);
 
+
+
     };
 }
 #endif

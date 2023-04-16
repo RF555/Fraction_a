@@ -21,6 +21,8 @@ TEST_CASE("Reduced form") {
     Fraction d(3, 9);
     CHECK(d.numerator() == 1);
     CHECK(d.denominator() == 3);
+//    cout << "d = " << d << " = " << double(d) << endl;
+
 }
 
 TEST_CASE("Error when dividing by 0") {
@@ -47,28 +49,35 @@ TEST_CASE("Arithmetic operations") {
     Fraction a;
     Fraction b(1, 5);
     Fraction c = a + b;
-    CHECK(c == 1 / 5);
+    CHECK(c == 0.2);
     Fraction d = b * c;
-    CHECK(d == 1 / 25);
+    CHECK(d == 0.04);
     Fraction e = b - d;
-    CHECK(e == (1 / 5 - 1 / 25));
+    CHECK(e == (0.2 - 0.04));
     c += b;
-    CHECK(c == 2 / 5);
+    CHECK(c == 0.4);
     e -= d;
-    CHECK(e == (1 / 5 - 2 / 25));
+    CHECK(e == (0.2 - 0.08));
     d *= b;
-    CHECK(d == 1 / 125);
+//    cout << "d=" << double(d) << endl;
+    CHECK(d == 0.008);
     CHECK(a++ == 0);
     CHECK(a == 1);
     CHECK(++a == 2);
     Fraction f(20, 7);
-    CHECK(f-- == 20 / 7);
-    CHECK(f == 13 / 7);
-    CHECK(--f == 6 / 7);
+    CHECK(f-- == 2.857);
+    CHECK(f == 1.857);
+    CHECK(--f == 0.857);
     Fraction g = c / f;
-    CHECK(g == 7 / 15);
+    Fraction _g(0.467);
+//    cout << "g = " << g << " = " << double(g) << endl;
+//    cout << "_g = " << _g << " = " << double(_g) << endl;
+    CHECK(g == 0.466);
     Fraction gg = -g;
-    CHECK(gg == -7 / 15);
+    Fraction _gg(-0.467);
+//    cout << "gg = " << gg << " = " << double(gg) << endl;
+//    cout << "_gg = " << _gg << " = " << double(_gg) << endl;
+    CHECK(gg == -0.467);
 }
 
 TEST_CASE("Boolean operations") {
@@ -95,4 +104,8 @@ TEST_CASE("Boolean operations") {
     CHECK(b > a);
     CHECK(d < a);
     CHECK(b > d);
+//    cout << "a = " << a << " = " << double(a) << endl;
+//    cout << "b = " << b << " = " << double(b) << endl;
+//    cout << "c = " << c << " = " << double(c) << endl;
+//    cout << "d = " << d << " = " << double(d) << endl;
 }

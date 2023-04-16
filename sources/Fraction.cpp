@@ -1,11 +1,15 @@
 #include "../sources/Fraction.hpp"
+#include <cmath>
+#include <numeric>
+#include <iomanip>
 #include "Fraction.hpp"
+
 
 namespace ariel {
 
     Fraction::Fraction() : _numerator(0), _denominator(1) {}
 
-    Fraction::Fraction(int x, int y = 1) : _numerator(x), _denominator(y) {
+    Fraction::Fraction(int x, int y) : _numerator(x), _denominator(y) {
         if (y == 0) {
             throw overflow_error("ARITHMETIC ERROR: Denominator can not be 0!\n");
         }
@@ -19,11 +23,11 @@ namespace ariel {
         this->reducedForm();
     }
 
-    Fraction::Fraction(const double &d) : _numerator(d), _denominator(1) {
+    Fraction::Fraction(const double &d) : _numerator(floor(d * 1000)), _denominator(1000) {
         this->reducedForm();
     }
 
-    Fraction::Fraction(const float &f) : _numerator(f), _denominator(1) {
+    Fraction::Fraction(const float &f) : _numerator(floor(f * 1000)), _denominator(1000) {
         this->reducedForm();
     }
 
@@ -108,7 +112,7 @@ namespace ariel {
     }
 
     Fraction Fraction::operator-() const {
-        return {-this->_numerator, -this->_denominator};
+        return {this->_numerator, -this->_denominator};
     }
 
     bool Fraction::operator!() const {
@@ -116,27 +120,29 @@ namespace ariel {
     }
 
     bool operator==(const Fraction &a, const Fraction &b) {
-        return a._numerator == b._numerator && a._denominator == b._denominator;
+        return (double(a) == double(b) || abs(double(a) - double(b)) < 0.0015);
+//        return (double(a) == double(b));
+
     }
 
     bool operator!=(const Fraction &a, const Fraction &b) {
-        return a._numerator != b._numerator || a._denominator != b._denominator;
+        return !(a == b);
     }
 
     bool operator>=(const Fraction &a, const Fraction &b) {
-        return a._numerator / a._denominator >= b._numerator / b._denominator;
+        return double(a) >= double(b);
     }
 
     bool operator<=(const Fraction &a, const Fraction &b) {
-        return a._numerator / a._denominator <= b._numerator / b._denominator;
+        return double(a) <= double(b);
     }
 
     bool operator>(const Fraction &a, const Fraction &b) {
-        return a._numerator / a._denominator > b._numerator / b._denominator;
+        return double(a) > double(b);
     }
 
     bool operator<(const Fraction &a, const Fraction &b) {
-        return a._numerator / a._denominator < b._numerator / b._denominator;
+        return double(a) < double(b);
     }
 
     std::ostream &operator<<(ostream &output, const Fraction &q) {
@@ -175,15 +181,19 @@ namespace ariel {
     }
 
     void Fraction::reducedForm() {
-
+        int num = this->_numerator;
+        int den = this->_denominator;
+        int d = gcd(num, den);
+        this->_numerator = this->_numerator / d;
+        this->_denominator = this->_denominator / d;
     }
 
     Fraction::operator double() const {
-        return this->_numerator / this->_denominator;
+        return round(this->_numerator * 1000.0 / this->_denominator) / 1000;
     }
 
     Fraction::operator float() const {
-        return this->_numerator / this->_denominator;
+        return round(this->_numerator * 1000) / round((this->_denominator * 1000.0));
     }
 
 
