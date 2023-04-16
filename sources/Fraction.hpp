@@ -16,9 +16,9 @@ namespace ariel {
 
         Fraction(const Fraction &q);
 
-        explicit Fraction(double d);
+        explicit Fraction(const double &d);
 
-        explicit Fraction(float f);
+        explicit Fraction(const float &f);
 
         ~Fraction();
 
@@ -71,8 +71,9 @@ namespace ariel {
 
     private:
         void reducedForm();
-        static istream& checkNextChar(istream& input, char expectedChar);
 
-        };
+        static istream &checkNextChar(istream &input, char expectedChar);
+
+    };
 }
 #endif

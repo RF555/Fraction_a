@@ -6,6 +6,9 @@ namespace ariel {
     Fraction::Fraction() : _numerator(0), _denominator(1) {}
 
     Fraction::Fraction(int x, int y = 1) : _numerator(x), _denominator(y) {
+        if (y == 0) {
+            throw overflow_error("ARITHMETIC ERROR: Denominator can not be 0!\n");
+        }
         this->reducedForm();
     }
 
@@ -14,11 +17,11 @@ namespace ariel {
         this->reducedForm();
     }
 
-    Fraction::Fraction(double d) : _numerator(d), _denominator(1) {
+    Fraction::Fraction(const double &d) : _numerator(d), _denominator(1) {
         this->reducedForm();
     }
 
-    Fraction::Fraction(float f) : _numerator(f), _denominator(1) {
+    Fraction::Fraction(const float &f) : _numerator(f), _denominator(1) {
         this->reducedForm();
     }
 
@@ -45,6 +48,9 @@ namespace ariel {
     }
 
     Fraction operator/(const Fraction &a, const Fraction &b) {
+        if (b == 0 || b._numerator == 0) {
+            throw overflow_error("ARITHMETIC ERROR: Can not divide by 0!");
+        }
         return {a._numerator * b._denominator, a._denominator * b._numerator};
     }
 
