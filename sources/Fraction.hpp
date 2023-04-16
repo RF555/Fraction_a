@@ -12,60 +12,67 @@ namespace ariel {
     public:
         Fraction();
 
-        Fraction(const int x, const int y);
+        Fraction(int x, int y);
 
         Fraction(const Fraction &q);
 
-        Fraction(const float d);
+        explicit Fraction(double d);
+
+        explicit Fraction(float f);
 
         ~Fraction();
 
-        Fraction &operator+=(const Fraction &q) const;
+        Fraction &operator=(const Fraction &q);
 
-        Fraction &operator-=(const Fraction &q) const;
+        Fraction &operator+=(const Fraction &q);
 
-        Fraction &operator*=(const Fraction &q) const;
+        Fraction &operator-=(const Fraction &q);
+
+        Fraction &operator*=(const Fraction &q);
 
         Fraction &operator++();
 
+        Fraction operator++(int);
+
         Fraction &operator--();
 
-        Fraction operator-();
+        Fraction operator--(int);
 
-        Fraction &operator++(int);
+        Fraction operator-() const;
 
-        Fraction &operator--(int);
 
-        friend Fraction operator+(Fraction a, Fraction b);
+        friend Fraction operator+(const Fraction &a, const Fraction &b);
 
-        friend Fraction operator-(Fraction a, Fraction b);
+        friend Fraction operator-(const Fraction &a, const Fraction &b);
 
-        friend Fraction operator*(Fraction a, Fraction b);
+        friend Fraction operator*(const Fraction &a, const Fraction &b);
 
-        friend Fraction operator/(Fraction a, Fraction b);
+        friend Fraction operator/(const Fraction &a, const Fraction &b);
 
         // Boolean operations:
         bool operator!() const;
 
-        friend bool operator!=(Fraction a, Fraction b);
+        friend bool operator!=(const Fraction &a, const Fraction &b);
 
-        friend bool operator==(Fraction a, Fraction b);
+        friend bool operator==(const Fraction &a, const Fraction &b);
 
-        friend bool operator>=(Fraction a, Fraction b);
+        friend bool operator>=(const Fraction &a, const Fraction &b);
 
-        friend bool operator<=(Fraction a, Fraction b);
+        friend bool operator<=(const Fraction &a, const Fraction &b);
 
-        friend bool operator<(Fraction a, Fraction b);
+        friend bool operator<(const Fraction &a, const Fraction &b);
 
-        friend bool operator>(Fraction a, Fraction b);
+        friend bool operator>(const Fraction &a, const Fraction &b);
 
         // I/O operations:
         friend std::ostream &operator<<(ostream &output, const Fraction &q);
 
-        friend std::istream &operator>>(istream &input, const Fraction &q);
+        friend std::istream &operator>>(istream &input, Fraction &q);
 
     private:
         void reducedForm();
-    };
+        static istream& checkNextChar(istream& input, char expectedChar);
+
+        };
 }
 #endif
