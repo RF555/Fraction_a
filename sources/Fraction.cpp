@@ -1,8 +1,7 @@
 #include "../sources/Fraction.hpp"
 #include "Fraction.hpp"
 
-namespace ariel
-{
+namespace ariel {
 
     Fraction::Fraction() : _numerator(0), _denominator(1) {}
 
