@@ -1,4 +1,3 @@
-#include "../sources/Fraction.hpp"
 #include <cmath>
 #include <numeric>
 #include <iomanip>
@@ -23,11 +22,11 @@ namespace ariel {
         this->reducedForm();
     }
 
-    Fraction::Fraction(const double &d) : _numerator(floor(d * 1000)), _denominator(1000) {
+    Fraction::Fraction(const double &d) : _numerator(floor(d * 10000)), _denominator(10000) {
         this->reducedForm();
     }
 
-    Fraction::Fraction(const float &f) : _numerator(floor(f * 1000)), _denominator(1000) {
+    Fraction::Fraction(const float &f) : _numerator(floor(f * 10000)), _denominator(10000) {
         this->reducedForm();
     }
 
@@ -120,9 +119,7 @@ namespace ariel {
     }
 
     bool operator==(const Fraction &a, const Fraction &b) {
-        return (double(a) == double(b) || abs(double(a) - double(b)) < 0.0015);
-//        return (double(a) == double(b));
-
+        return (double(a) == double(b) || abs(double(a) - double(b)) <= 0.0001);
     }
 
     bool operator!=(const Fraction &a, const Fraction &b) {
@@ -189,11 +186,11 @@ namespace ariel {
     }
 
     Fraction::operator double() const {
-        return round(this->_numerator * 1000.0 / this->_denominator) / 1000;
+        return round(this->_numerator * 100000.0 / this->_denominator) / 100000;
     }
 
     Fraction::operator float() const {
-        return round(this->_numerator * 1000) / round((this->_denominator * 1000.0));
+        return round(this->_numerator * 100000.0 / this->_denominator) / 100000;
     }
 
 

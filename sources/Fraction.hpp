@@ -31,6 +31,15 @@ namespace ariel {
         Fraction &operator=(const Fraction &q);
 
         // Arithmetic operations:
+        friend Fraction operator+(const Fraction &a, const Fraction &b);
+
+        friend Fraction operator-(const Fraction &a, const Fraction &b);
+
+        friend Fraction operator*(const Fraction &a, const Fraction &b);
+
+        friend Fraction operator/(const Fraction &a, const Fraction &b);
+
+
         Fraction &operator+=(const Fraction &q);
 
         Fraction &operator-=(const Fraction &q);
@@ -46,15 +55,6 @@ namespace ariel {
         Fraction operator--(int);
 
         Fraction operator-() const;
-
-
-        friend Fraction operator+(const Fraction &a, const Fraction &b);
-
-        friend Fraction operator-(const Fraction &a, const Fraction &b);
-
-        friend Fraction operator*(const Fraction &a, const Fraction &b);
-
-        friend Fraction operator/(const Fraction &a, const Fraction &b);
 
         // Boolean operations:
         bool operator!() const;
@@ -72,7 +72,6 @@ namespace ariel {
         friend bool operator>(const Fraction &a, const Fraction &b);
 
         // Conversions:
-
         explicit operator double() const;
 
         explicit operator float() const;
@@ -83,10 +82,12 @@ namespace ariel {
         friend std::istream &operator>>(istream &input, Fraction &q);
 
     private:
+        /**
+         * Reduce the fraction to it's minimal form.
+         */
         void reducedForm();
 
         static istream &checkNextChar(istream &input, char expectedChar);
-
 
 
     };
