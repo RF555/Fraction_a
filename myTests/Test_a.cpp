@@ -9,9 +9,17 @@ TEST_CASE("Constructors initiated correctly") {
     Fraction a;
     CHECK(a.numerator() == 0);
     CHECK(a.denominator() == 1);
-    Fraction b(1, 2);
+    Fraction b(1, 3);
     CHECK(b.numerator() == 1);
-    CHECK(b.denominator() == 2);
+    CHECK(b.denominator() == 3);
+    float ff = 1.0 / 3;
+    Fraction c(ff);
+    CHECK(c == 1.0 / 3);
+    CHECK(c == b);
+    double dd = 1.0 / 6;
+    Fraction d(dd);
+    CHECK(d == 2.0 / 12);
+    CHECK(d == c / 2);
 }
 
 TEST_CASE("Reduced form") {
